@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,11 +31,48 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
+
+        //Set Numbers activity onClickListener
+        TextView numbersTextView = (TextView) findViewById(R.id.numbers);
+        numbersTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(view, NumbersActivity.class);
+            }
+        });
+
+        //Set Family activity onClickListener
+        TextView familyTextView = (TextView) findViewById(R.id.family);
+        familyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(view, FamilyActivity.class);
+            }
+        });
+
+        //Set Colors activity onClickListener
+        TextView colorsTextView = (TextView) findViewById(R.id.colors);
+        colorsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(view, ColorsActivity.class);
+            }
+        });
+
+        //Set Phrases activity onClickListener
+        TextView phrasesTextView = (TextView) findViewById(R.id.phrases);
+        phrasesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(view, PhrasesActivity.class);
+            }
+        });
+
     }
 
-    public void openNumbersActivity (View view) {
-        Intent intent = new Intent(this, NumbersActivity.class);
+    public void openActivity (View view, Class cls) {
+        Intent intent = new Intent(this, cls);
         startActivity(intent);
-        Log.i("MainActivity", "OpenNumbersActivity - calling startActivity(NumbersActivity)");
+        Log.i("MainActivity:openActivity", "Opening: " + cls.getCanonicalName());
     }
 }
