@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Helper class to open an Activity Class
+     * @param view not used - TODO:remove this?
+     * @param cls a class to be opened
+     */
     public void openActivity (View view, Class cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
