@@ -20,23 +20,12 @@ public class NumbersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_numbers);
 
         //String[] words = new String[11];
-        ArrayList<String> words = new ArrayList<String>();
+        ArrayList<Word> words = new ArrayList<Word>();
 
-        words.add(0, "zero");
-        words.add(1, "one");
-        words.add(2, "two");
-        words.add(3, "three");
-        words.add(4, "four");
-        words.add(5, "five");
-        words.add(6, "six");
-        words.add(7, "seven");
-        words.add(8, "eight");
-        words.add(9, "nine");
-        words.add(10, "ten");
-        words.add(11, "eleven");
-        words.add(12, "twelve");
-        words.add(13, "thirteen");
-        words.add(14, "fourteen");
+        //words.add(0, "zero");
+        words.add(new Word("zero", "dingle"));
+        words.add(new Word("lutti", "one"));
+
 
 
         // Create an {@link ArrayAdapter}, whose data source is a list of Strings. The
@@ -44,8 +33,8 @@ public class NumbersActivity extends AppCompatActivity {
         // simple_list_item_1.xml layout resource defined in the Android framework.
         // This list item layout contains a single {@link TextView}, which the adapter will set to
         // display a single word.
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
+        WordAdapter adapter =
+                new WordAdapter(this, words);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -56,7 +45,7 @@ public class NumbersActivity extends AppCompatActivity {
         // {@link ListView} will display list items for each word in the list of words.
         // Do this by calling the setAdapter method on the {@link ListView} object and pass in
         // 1 argument, which is the {@link ArrayAdapter} with the variable name itemsAdapter.
-        listView.setAdapter(itemsAdapter);
+        listView.setAdapter(adapter);
 
         //LinearLayout rootView =  (LinearLayout)findViewById(R.id.activity_numbers);
         /*

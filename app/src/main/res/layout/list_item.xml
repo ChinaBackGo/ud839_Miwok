@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/miwok_word"
-    tools:text="lutti"/>
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/list_item_view">
 
     <TextView
+        android:id="@+id/miwok_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/english_word"
-        tools:text="one"/>
+        tools:text="lutti" />
+
+    <TextView
+        android:id="@+id/default_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="one" />
 </LinearLayout>
