@@ -22,17 +22,27 @@ public class NumbersActivity extends AppCompatActivity {
         //String[] words = new String[11];
         ArrayList<Word> words = new ArrayList<Word>();
 
-        //words.add(0, "zero");
+
+        //Add word object to words arrayList
         words.add(new Word("zero", "dingle"));
-        words.add(new Word("lutti", "one"));
+        words.add(new Word("one", "lutti"));
+        words.add(new Word("two", "otiiko"));
+        words.add(new Word("three", "tolookosu"));
+        words.add(new Word("four", "oyyisa"));
+        words.add(new Word("five", "massokka"));
+        words.add(new Word("six", "temmoka"));
+        words.add(new Word("seven", "kenekaku"));
+        words.add(new Word("eight", "kawinta"));
+        words.add(new Word("nine", "wo'e"));
+        words.add(new Word("ten", "na'aacha"));
+        words.add(new Word("dig", "dig"));
+        words.add(new Word("dug", "dug"));
 
 
-
-        // Create an {@link ArrayAdapter}, whose data source is a list of Strings. The
+        // Create an {@link WordAdapter}, whose data source is a list of Word objects. The
         // adapter knows how to create layouts for each item in the list, using the
-        // simple_list_item_1.xml layout resource defined in the Android framework.
-        // This list item layout contains a single {@link TextView}, which the adapter will set to
-        // display a single word.
+        // getView overrided method.
+        // This list item layout two text views and an image resource
         WordAdapter adapter =
                 new WordAdapter(this, words);
 
@@ -47,31 +57,6 @@ public class NumbersActivity extends AppCompatActivity {
         // 1 argument, which is the {@link ArrayAdapter} with the variable name itemsAdapter.
         listView.setAdapter(adapter);
 
-        //LinearLayout rootView =  (LinearLayout)findViewById(R.id.activity_numbers);
-        /*
-        // Loop the ArrayList using a Java Iterator
-        // TODO: How to get the iterator index?
-        // TODO: how to use foreach here?
-        Iterator<String> wordsIterator = words.iterator();
-        while(wordsIterator.hasNext()) {
-            //Create a new TextView, set the text to word
-            TextView childView = new TextView(this);
-            childView.setText(wordsIterator.next());
-
-            //Add the new wordTextView to parent numbersView
-            rootView.addView(childView);
-
-        //    Log.i("NumbersActivity.java", "Word at Index:" + index + " " + word);
-        //    index++;
-        }
-        */
-
-        /*
-        // Loop the Array List using a for loop
-        for (int i = 0; i < words.size(); i++) {
-            Log.i("NumbersActivity.java", "Word at Index:" + i + " " + words.get(i));
-        }
-        */
 
     }
 }
