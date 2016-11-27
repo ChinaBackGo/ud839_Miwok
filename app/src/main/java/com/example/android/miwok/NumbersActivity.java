@@ -3,7 +3,6 @@ package com.example.android.miwok;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
@@ -41,6 +40,9 @@ public class NumbersActivity extends AppCompatActivity {
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml file.
         ListView listView = (ListView) findViewById(R.id.list);
+
+        // Programmatically set the listView's background color to the proper category color
+        listView.setBackgroundColor(getResources().getColor(R.color.category_numbers, null));
 
         // Make the {@link ListView} use the {@link ArrayAdapter} we created above, so that the
         // {@link ListView} will display list items for each word in the list of words.
