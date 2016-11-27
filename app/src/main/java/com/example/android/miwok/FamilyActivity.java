@@ -35,14 +35,12 @@ public class FamilyActivity extends AppCompatActivity {
         // getView overrided method.
         // This list item layout two text views and an image resource
         WordAdapter adapter =
-                new WordAdapter(this, words);
+                new WordAdapter(this, words, R.color.category_family);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml file.
         ListView listView = (ListView) findViewById(R.id.list);
-        // Programmatically set the listView's background color to the proper category color
-        listView.setBackgroundColor(getResources().getColor(R.color.category_family, null));
 
         // Make the {@link ListView} use the {@link ArrayAdapter} we created above, so that the
         // {@link ListView} will display list items for each word in the list of words.
