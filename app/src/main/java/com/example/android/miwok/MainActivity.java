@@ -78,6 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void openActivity (View view, Class cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
-        Log.i("MainActivity:openActivity", "Opening: " + cls.getCanonicalName());
+        Log.i("MainActivity", "Opening: " + cls.getCanonicalName());
     }
 }
