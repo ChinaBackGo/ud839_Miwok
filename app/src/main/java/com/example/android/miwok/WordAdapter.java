@@ -1,7 +1,9 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +35,25 @@ public class WordAdapter extends ArrayAdapter<Word> {
         }
 
         // Get the {@link Word} object located at this position in the list
-        Word currentWord = getItem(position);
+        final Word currentWord = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID miwok_word
         TextView miwokWordTextView = (TextView) listItemView.findViewById(R.id.miwok_word);
         // Get the Miwok Translation from the current Word object and
         // set this text on the name TextView
         miwokWordTextView.setText(currentWord.getMiwokTransation());
+
+        //TODO: Testing onclick listener creation for an audio file
+        miwokWordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("WordAdapter", "onClick: " + currentWord.getDefaultTranslation());
+                MediaPlayer mMediaPlayer = MediaPlayer.create(getContext(), R.raw.color_black);
+                mMediaPlayer.start();
+                //mMediaPlayer.release();
+            }
+        });
+
 
         // Find the TextView in the list_item.xml layout with the ID default_word
         TextView defautWordTextView = (TextView) listItemView.findViewById(R.id.default_word);
