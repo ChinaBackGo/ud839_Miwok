@@ -50,6 +50,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
                 Log.i("WordAdapter", "onClick: " + currentWord.getDefaultTranslation());
                 MediaPlayer mMediaPlayer = MediaPlayer.create(getContext(), R.raw.color_black);
                 mMediaPlayer.start();
+                // TODO : playing around mMediaPlayer.setOnCompletionListener (MediaPlayer.OnCompletionListener listener)
                 //mMediaPlayer.release();
             }
         });
