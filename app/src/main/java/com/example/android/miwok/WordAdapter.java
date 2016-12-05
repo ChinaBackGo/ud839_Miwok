@@ -39,6 +39,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         // Find the TextView in the list_item.xml layout with the ID miwok_word
         TextView miwokWordTextView = (TextView) listItemView.findViewById(R.id.miwok_word);
+
         // Get the Miwok Translation from the current Word object and
         // set this text on the name TextView
         miwokWordTextView.setText(currentWord.getMiwokTransation());
@@ -47,17 +48,30 @@ public class WordAdapter extends ArrayAdapter<Word> {
         miwokWordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("WordAdapter", "onClick: " + currentWord.getRawResourceId());
+                Log.i("WordAdapter", "onClickListener Registered - RawResourceId: " + currentWord.getRawResourceId());
+                //Create the mediaplayer - play the sound
                 MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), currentWord.getRawResourceId());
+                mediaPlayer.start();
+                Log.i("MediaPlayer Start", mediaPlayer.toString());
+
                 //Register an onClick completion listener to clean up
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
+                        Log.i("MediaPlayer", "Released: " + mediaPlayer.toString());
                         mediaPlayer.stop();
                         mediaPlayer.release();
                     }
                 });
-                mediaPlayer.start();
+
+                //Register an onError listener to catch mediaplayer errors
+                mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener(){
+                    @Override
+                    public boolean onError(MediaPlayer mp, int what, int extra) {
+                        Log.e("MediaPlayer Error: ", "what: " + what + "extra: " + extra);
+                        return false;
+                    }
+                });
             }
         });
 
