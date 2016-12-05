@@ -11,8 +11,10 @@ public class Word {
     private String mMiwokTranslation;
     //Default Translation
     private String mDefaultWorld;
-    //Private in word image id
+    //Private itn word image id
     private int mImageResourceId = NO_IMAGE_PROVIDED;
+    //Private int raw resource id
+    private int mRawResourceId;
     //Private static int final no image state
     private static final int NO_IMAGE_PROVIDED = -1;
 
@@ -20,10 +22,12 @@ public class Word {
      * Public Constructor
      * @param miwok_word
      * @param default_word
+     * @param raw_resource_id
      */
-    public Word(String miwok_word, String default_word) {
+    public Word(String miwok_word, String default_word, int raw_resource_id) {
         mMiwokTranslation = miwok_word;
         mDefaultWorld = default_word;
+        mRawResourceId = raw_resource_id;
     }
 
     /**
@@ -31,11 +35,13 @@ public class Word {
      * @param miwok_word
      * @param default_word
      * @param image_resource_id
+     * @param raw_resource_id
      */
-    public Word(String miwok_word, String default_word, int image_resource_id) {
+    public Word(String miwok_word, String default_word, int image_resource_id, int raw_resource_id) {
         mMiwokTranslation = miwok_word;
         mDefaultWorld = default_word;
         mImageResourceId = image_resource_id;
+        mRawResourceId = raw_resource_id;
     }
 
     /**
@@ -62,6 +68,18 @@ public class Word {
         return mImageResourceId;
     }
 
+    /**
+     * Get Method - raw resource id
+     * @return int raw resource id
+     */
+    public int getRawResourceId() {
+        return mRawResourceId;
+    }
+
+    /**
+     * has Image - returns true/false if the word has an image resource id associated
+     * @return has image
+     */
     public boolean hasImage() {
         return mImageResourceId != NO_IMAGE_PROVIDED;
     }
