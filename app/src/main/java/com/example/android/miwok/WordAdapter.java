@@ -43,14 +43,21 @@ public class WordAdapter extends ArrayAdapter<Word> {
         // set this text on the name TextView
         miwokWordTextView.setText(currentWord.getMiwokTransation());
 
-        //TODO: do this with a release of mediaplayer
+        //Register onClick listerner to start audio playback of word
         miwokWordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("WordAdapter", "onClick: " + currentWord.getRawResourceId());
                 MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), currentWord.getRawResourceId());
+                //Register an onClick completion listener to clean up
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
+                });
                 mediaPlayer.start();
-                //mediaPlayer.release();
             }
         });
 
