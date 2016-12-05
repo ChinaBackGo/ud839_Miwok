@@ -47,18 +47,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         miwokWordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
-                Log.i("WordAdapter", "onClick: " + currentWord.getDefaultTranslation());
-                MediaPlayer mMediaPlayer = MediaPlayer.create(getContext(), R.raw.color_black);
-                mMediaPlayer.start();
-                // TODO : playing around mMediaPlayer.setOnCompletionListener (MediaPlayer.OnCompletionListener listener)
-                //mMediaPlayer.release();
-=======
                 Log.i("WordAdapter", "onClick: " + currentWord.getRawResourceId());
                 MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), currentWord.getRawResourceId());
                 mediaPlayer.start();
                 //mediaPlayer.release();
->>>>>>> fac04ba92abe38ecd82f6480e7189972374fe6fc
             }
         });
 
