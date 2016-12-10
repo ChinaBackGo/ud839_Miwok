@@ -44,38 +44,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
         // set this text on the name TextView
         miwokWordTextView.setText(currentWord.getMiwokTransation());
 
-        //Register onClick listerner to start audio playback of word
-        miwokWordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("WordAdapter", "onClickListener Registered - RawResourceId: " + currentWord.getRawResourceId());
-                //Create the mediaplayer - play the sound
-                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), currentWord.getRawResourceId());
-                mediaPlayer.start();
-                Log.i("MediaPlayer Start", mediaPlayer.toString());
-
-                //Register an onClick completion listener to clean up
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        Log.i("MediaPlayer", "Released: " + mediaPlayer.toString());
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                    }
-                });
-
-                //Register an onError listener to catch mediaplayer errors
-                mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener(){
-                    @Override
-                    public boolean onError(MediaPlayer mp, int what, int extra) {
-                        Log.e("MediaPlayer Error: ", "what: " + what + "extra: " + extra);
-                        return false;
-                    }
-                });
-            }
-        });
-
-
         // Find the TextView in the list_item.xml layout with the ID default_word
         TextView defautWordTextView = (TextView) listItemView.findViewById(R.id.default_word);
         // Get the default translation from the current word object and

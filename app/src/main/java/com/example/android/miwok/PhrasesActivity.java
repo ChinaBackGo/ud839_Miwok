@@ -1,12 +1,19 @@
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class PhrasesActivity extends AppCompatActivity {
+
+    /** Handles playback of all the sound files */
+    private MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +54,38 @@ public class PhrasesActivity extends AppCompatActivity {
         // Do this by calling the setAdapter method on the {@link ListView} object and pass in
         // 1 argument, which is the {@link ArrayAdapter} with the variable name itemsAdapter.
         listView.setAdapter(adapter);
+
+        //Register onClick listerner to start audio playback of word
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+                Word currentWord = (Word)parent.getItemAtPosition(position);
+                currentWord.getRawResourceId();
+                mMediaPlayer = MediaPlayer.create(view.getContext(), currentWord.getRawResourceId());
+                mMediaPlayer.start();
+                Log.i("onItemClick", currentWord.toString());
+
+                //Register an onClick completion listener to clean up
+                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        Log.i("MediaPlayer", "Released: " + mediaPlayer.toString());
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
+                });
+
+                //Register an onError listener to catch mediaplayer errors
+                mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener(){
+                    @Override
+                    public boolean onError(MediaPlayer mp, int what, int extra) {
+                        Log.e("MediaPlayer Error: ", "what: " + what + "extra: " + extra);
+                        return false;
+                    }
+                });
+            }
+        });
+
+
     }
 }
