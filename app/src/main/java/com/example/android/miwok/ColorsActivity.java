@@ -13,8 +13,33 @@ import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
 
-    /** Handles playback of all the sound files */
+    /**
+     * Handles playback of all the sound files
+     */
     private MediaPlayer mMediaPlayer;
+
+    /**
+     * This listener gets triggered when the {@link MediaPlayer} has completed
+     * playing the audio file.
+     */
+    private final MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            // Now that the sound file has finished playing, release the media player resources.
+            releaseMediaPlayer();
+        }
+    };
+
+    /**
+     * This listener gets triggered when the {@link MediaPlayer} has an Error
+     */
+    private final MediaPlayer.OnErrorListener mOnErrorListener = new MediaPlayer.OnErrorListener() {
+        @Override
+        public boolean onError(MediaPlayer mp, int what, int extra) {
+            Log.e("MediaPlayer Error: ", "what: " + what + "extra: " + extra);
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,32 +83,38 @@ public class ColorsActivity extends AppCompatActivity {
         //Register onClick listerner to start audio playback of word
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-                Word currentWord = (Word)parent.getItemAtPosition(position);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Word currentWord = (Word) parent.getItemAtPosition(position);
                 currentWord.getRawResourceId();
+
+                releaseMediaPlayer();
+
                 mMediaPlayer = MediaPlayer.create(view.getContext(), currentWord.getRawResourceId());
                 mMediaPlayer.start();
                 Log.i("onItemClick", currentWord.toString());
 
-                //Register an onClick completion listener to clean up
-                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        Log.i("MediaPlayer", "Released: " + mediaPlayer.toString());
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                    }
-                });
-
-                //Register an onError listener to catch mediaplayer errors
-                mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener(){
-                    @Override
-                    public boolean onError(MediaPlayer mp, int what, int extra) {
-                        Log.e("MediaPlayer Error: ", "what: " + what + "extra: " + extra);
-                        return false;
-                    }
-                });
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                mMediaPlayer.setOnErrorListener(mOnErrorListener);
             }
         });
+    }
+
+    /**
+     * Clean up the media player by releasing its resources.
+     */
+    private void releaseMediaPlayer() {
+        // If the media player is not null, then it may be currently playing a sound.
+        if (mMediaPlayer != null) {
+            Log.i("MediaPlayer", "Released: " + mMediaPlayer.toString());
+
+            // Regardless of the current state of the media player, release its resources
+            // because we no longer need it.
+            mMediaPlayer.release();
+
+            // Set the media player back to null. For our code, we've decided that
+            // setting the media player to null is an easy way to tell that the media player
+            // is not configured to play an audio file at the moment.
+            mMediaPlayer = null;
+        }
     }
 }
