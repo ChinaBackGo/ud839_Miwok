@@ -15,13 +15,10 @@
  */
 package com.example.android.miwok;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,55 +26,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
-        //Set Numbers activity onClickListener
-        TextView numbersTextView = (TextView) findViewById(R.id.numbers);
-        numbersTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity(view, NumbersActivity.class);
-            }
-        });
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        //Set Family activity onClickListener
-        TextView familyTextView = (TextView) findViewById(R.id.family);
-        familyTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity(view, FamilyActivity.class);
-            }
-        });
+        // Create an adapter that knows which fragment should be shown on each page
+        PagerAdapter adapter = new CategoryAdapter(getSupportFragmentManager());
 
-        //Set Colors activity onClickListener
-        TextView colorsTextView = (TextView) findViewById(R.id.colors);
-        colorsTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity(view, ColorsActivity.class);
-            }
-        });
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
 
-        //Set Phrases activity onClickListener
-        TextView phrasesTextView = (TextView) findViewById(R.id.phrases);
-        phrasesTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity(view, PhrasesActivity.class);
-            }
-        });
-
-    }
-
-    /**
-     * Helper class to open an Activity Class
-     * @param view not used - TODO:remove this?
-     * @param cls a class to be opened
-     */
-    public void openActivity (View view, Class cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-        Log.i("MainActivity", "Opening: " + cls.getCanonicalName());
     }
 }
