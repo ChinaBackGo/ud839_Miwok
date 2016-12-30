@@ -1,17 +1,20 @@
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
- * Created by Work on 2016-12-25.
+ * TODO: Fix this comment for CategoryAdapter
  */
 
 public class CategoryAdapter extends FragmentPagerAdapter {
 
-    public CategoryAdapter(FragmentManager fm) {
+    private Context mContext;
+    public CategoryAdapter(Context context, FragmentManager fm) {
         super(fm);
+        mContext = context;
     }
 
     @Override
@@ -39,13 +42,13 @@ public class CategoryAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Numbers";
+                return mContext.getString(R.string.category_numbers);
             case 1:
-                return "Family";
+                return mContext.getString(R.string.category_family);
             case 2:
-                return "Colors";
+                return mContext.getString(R.string.category_colors);
             case 3:
-                return "Phrases";
+                return mContext.getString(R.string.category_phrases);
             default:
                 return null;
         }

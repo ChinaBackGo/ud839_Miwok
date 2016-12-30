@@ -12,7 +12,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -39,4 +40,15 @@
         <item name="android:paddingLeft">@dimen/activity_list_padding</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
+
+    <!-- Style for a Tab Layout -->
+    <style name="TabLayoutStyle"> 
+        <item name="tabTextColor">@color/tab_text_unselected</item> 
+        <item name="tabSelectedTextColor">@android:color/white</item> 
+        <item name="tabIndicatorColor">@android:color/white</item> 
+        <item name="tabBackground">@color/primary_color</item> 
+    </style>
+
+
+
 </resources>
